@@ -1,6 +1,7 @@
 # Firebase App Hosting configuration: https://firebase.google.com/docs/app-hosting/configure
 # Secrets live in Cloud Secret Manager, never in this file. Create them with, e.g.:
 #   firebase apphosting:secrets:set RESEND_API_KEY
+#   firebase apphosting:secrets:set TURNSTILE_SECRET_KEY
 # and grant the backend access when prompted.
 
 runConfig:
@@ -48,13 +49,15 @@ env:
     secret: RESEND_API_KEY
     availability:
       - RUNTIME
+  # Not secrets, so plain values. Contact messages are delivered here.
   - variable: CONTACT_TO_EMAIL
-    secret: CONTACT_TO_EMAIL
+    value: mikembugua.dev@gmail.com
     availability:
       - RUNTIME
-  # Must be on a domain verified in Resend, e.g. "Hotel Sapphire <no-reply@yourdomain.com>".
+  # TODO: Resend's sandbox sender, which can only deliver to the email that owns the Resend account.
+  # For production, verify a domain in Resend and use e.g. "Hotel Sapphire <no-reply@yourdomain.com>".
   - variable: CONTACT_FROM_EMAIL
-    secret: CONTACT_FROM_EMAIL
+    value: onboarding@resend.dev
     availability:
       - RUNTIME
   - variable: TURNSTILE_SECRET_KEY

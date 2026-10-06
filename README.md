@@ -99,8 +99,9 @@ requires the Blaze plan. Static Firebase Hosting cannot run it, and `output: 'ex
 
 1. `firebase login` with the account that owns the project; `.firebaserc` points at `hotelsapphire-next`.
 2. Create the secrets in Secret Manager (values are never committed):
-   `firebase apphosting:secrets:set RESEND_API_KEY` (also `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`,
-   `TURNSTILE_SECRET_KEY`), granting the backend access when prompted.
+   `firebase apphosting:secrets:set RESEND_API_KEY` and `firebase apphosting:secrets:set TURNSTILE_SECRET_KEY`,
+   granting the backend access when prompted. `CONTACT_TO_EMAIL` and `CONTACT_FROM_EMAIL` are plain values in
+   `apphosting.yaml`.
 3. Edit `apphosting.yaml`: set `NEXT_PUBLIC_SITE_URL` and the real `NEXT_PUBLIC_TURNSTILE_SITE_KEY`
    (the committed one is Cloudflare's always-pass test key).
 4. Create the backend (`firebase apphosting:backends:create --project hotelsapphire-next`, backend id
