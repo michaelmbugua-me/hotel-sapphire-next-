@@ -1,0 +1,16 @@
+node_modules
+.next
+out
+coverage
+next-env.d.ts
+*.tsbuildinfo
+.env
+.env*.local
+.vercel
+playwright-report
+test-results
+.DS_Store
+
+# Firebase
+firebase-debug.log*
+.firebase/

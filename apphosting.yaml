@@ -1,0 +1,73 @@
+# Firebase App Hosting configuration: https://firebase.google.com/docs/app-hosting/configure
+# Secrets live in Cloud Secret Manager, never in this file. Create them with, e.g.:
+#   firebase apphosting:secrets:set RESEND_API_KEY
+# and grant the backend access when prompted.
+
+runConfig:
+  # Keep a single small instance: this is a low-traffic marketing site.
+  minInstances: 0
+  maxInstances: 2
+  cpu: 1
+  memoryMiB: 512
+  concurrency: 80
+
+env:
+  # --- Public values (inlined into the client bundle at build time, so BUILD is required) ---
+  # TODO: set to the real production URL (custom domain, or the *.hosted.app URL App Hosting assigns).
+  - variable: NEXT_PUBLIC_SITE_URL
+    value: https://hotelsapphire-next.web.app
+    availability:
+      - BUILD
+      - RUNTIME
+  # TravelBook booking-engine identifiers (same values the Angular app hardcodes).
+  - variable: NEXT_PUBLIC_BOOKING_HOTEL_ID
+    value: '26609'
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_BOOKING_STYLE_ID
+    value: '20249'
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_BOOKING_DC_ID
+    value: '1161'
+    availability:
+      - BUILD
+      - RUNTIME
+  # TODO: replace with the real Turnstile SITE key. This is Cloudflare's always-passes TEST key,
+  # which provides NO spam protection in production.
+  - variable: NEXT_PUBLIC_TURNSTILE_SITE_KEY
+    value: 1x00000000000000000000AA
+    availability:
+      - BUILD
+      - RUNTIME
+
+  # --- Server-only (Secret Manager). Create each secret before the first rollout. ---
+  - variable: RESEND_API_KEY
+    secret: RESEND_API_KEY
+    availability:
+      - RUNTIME
+  - variable: CONTACT_TO_EMAIL
+    secret: CONTACT_TO_EMAIL
+    availability:
+      - RUNTIME
+  # Must be on a domain verified in Resend, e.g. "Hotel Sapphire <no-reply@yourdomain.com>".
+  - variable: CONTACT_FROM_EMAIL
+    secret: CONTACT_FROM_EMAIL
+    availability:
+      - RUNTIME
+  - variable: TURNSTILE_SECRET_KEY
+    secret: TURNSTILE_SECRET_KEY
+    availability:
+      - RUNTIME
+  # Optional shared rate-limit store (set both or neither). Without them an in-memory limiter is
+  # used, which only limits per instance. Uncomment after creating the secrets:
+  # - variable: UPSTASH_REDIS_REST_URL
+  #   secret: UPSTASH_REDIS_REST_URL
+  #   availability:
+  #     - RUNTIME
+  # - variable: UPSTASH_REDIS_REST_TOKEN
+  #   secret: UPSTASH_REDIS_REST_TOKEN
+  #   availability:
+  #     - RUNTIME

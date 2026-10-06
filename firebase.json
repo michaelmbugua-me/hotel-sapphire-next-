@@ -1,0 +1,7 @@
+{
+  "apphosting": {
+    "backendId": "hotel-sapphire-next",
+    "rootDir": "./",
+    "ignore": ["node_modules", ".git", "firebase-debug.*.log", "e2e", "tests", "test-results"]
+  }
+}
