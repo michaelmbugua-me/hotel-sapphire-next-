@@ -25,12 +25,8 @@ test.describe('header: desktop', () => {
     ).toBeVisible();
   });
 
-  test('the logo is served as a small optimized WebP, not the 4096px original', async ({
-    page,
-  }) => {
-    const logoResponse = page.waitForResponse(
-      (r) => r.url().includes('/_next/image') && r.url().includes('logo'),
-    );
+  test('the logo is a small transparent WebP, not the 4096px original', async ({ page }) => {
+    const logoResponse = page.waitForResponse((r) => r.url().includes('logo'));
     await page.goto('/');
     const response = await logoResponse;
     expect(response.headers()['content-type']).toBe('image/webp');

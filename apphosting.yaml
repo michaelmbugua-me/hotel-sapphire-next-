@@ -14,9 +14,9 @@ runConfig:
 
 env:
   # --- Public values (inlined into the client bundle at build time, so BUILD is required) ---
-  # TODO: set to the real production URL (custom domain, or the *.hosted.app URL App Hosting assigns).
+  # TODO: change to the custom domain once one is connected (this is the *.hosted.app URL App Hosting assigned).
   - variable: NEXT_PUBLIC_SITE_URL
-    value: https://hotelsapphire-next.web.app
+    value: https://hotel-sapphire-next--hotelsapphire-next.europe-west4.hosted.app
     availability:
       - BUILD
       - RUNTIME
