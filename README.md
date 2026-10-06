@@ -18,8 +18,8 @@ cp .env.example .env.local   # then edit; see "Environment variables"
 pnpm dev                     # http://localhost:3000
 ```
 
-Requires Node 22+ and pnpm. If pnpm reports "Ignored build scripts: unrs-resolver", that is harmless
-(an optional native speed-up for the ESLint import resolver).
+Requires Node 22+ and pnpm. `pnpm-workspace.yaml` skips the optional `unrs-resolver` install script; without it
+pnpm exits non-zero in CI with "Ignored build scripts".
 
 ## Scripts
 

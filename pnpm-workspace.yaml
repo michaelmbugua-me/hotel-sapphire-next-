@@ -1,0 +1,5 @@
+# Not a workspace: pnpm reads its settings from this file. `unrs-resolver` only ships an optional native
+# speed-up for the ESLint import resolver (it falls back to a WASM build), so its install script is
+# explicitly skipped. Without this entry pnpm exits non-zero in CI ("Ignored build scripts").
+allowBuilds:
+  unrs-resolver: false
